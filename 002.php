@@ -1,11 +1,65 @@
 <?php 
-//Something to write to txt log
-// $log  = "User: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").PHP_EOL.
-//         "Attempt: ".($result[0]['success']=='1'?'Success':'Failed').PHP_EOL.
-//         "User: ".$username.PHP_EOL.
-//         "-------------------------".PHP_EOL;
+/**
+ * 
+ */
+class Log
+{
+	function LogInfo()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] INFO: This is an information about something.".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
 
-$log = "[".date("Y-m-d g:i")."]".PHP_EOL;
-//Save string to log, use FILE_APPEND to append.
-file_put_contents('./app.log', $log, FILE_APPEND);
+	function LogError()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] ERROR: We can't divide any numbers by zero.".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+
+	function LogNotice()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] NOTICE: Someone loves your status.".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+
+	function LogWarning()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] WARNING: Insufficient funds.".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+
+	function LogDebug()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] DEBUG: This is debug message.".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+
+	function LogAlert()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] ALERT: Achtung! Achtung!".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+
+	function LogCritical()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] CRITICAL: Medic!! We've got critical damages.".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+
+	function LogEmergency()
+	{
+		$log = "[".date("Y-m-dTH:i:s")."] EMERGENCY: System hung. Contact system administrator immediately!".PHP_EOL;
+		file_put_contents('./app.log', $log, FILE_APPEND);
+	}
+}
+
+$log = new Log();
+$log->LogInfo();
+$log->LogError();
+$log->LogNotice();
+$log->LogWarning();
+$log->LogDebug();
+$log->LogAlert();
+$log->LogCritical();
+$log->LogEmergency();
  ?>

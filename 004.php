@@ -4,7 +4,7 @@
  */
 class Shop
 {
-	protected $data_item;
+	public $data_item;
 	function __construct()
 	{
 		$this->data_item = new ArrayObject();
@@ -15,6 +15,8 @@ class Shop
 		if ($value != '') 
 		{
 			$this->data_item->append($value);
+		// }
+			// array_push($this->data_item, $value);
 		}
 	}
 
@@ -26,10 +28,7 @@ class Shop
 	protected function del_item($index)
 	{
 		$this->data_item->offsetUnset($index);
-		// array_splice($this->data_item, $index, 1);
-		// $this->data_item = array_combine(range(1, count($this->data_item)), array_values($this->data_item));
-		// array_splice($this->data_item, $index, -$index);
-		// $arrayobj->offsetSet(null, 'last');
+		// is_array($this->data_item)? array_values($this->data_item): array();
 	}
 
 	protected function update_index()
@@ -139,6 +138,6 @@ $cart->removeItem('{"item_id": 2}');
 $cart->addItem('{ "item_id": 4, "price": 400, "quantity": 6 }');
 
 // $cart->totalItems();
-$cart->totalQuantity();
+// $cart->totalQuantity();
 $cart->showAll();
  ?>
