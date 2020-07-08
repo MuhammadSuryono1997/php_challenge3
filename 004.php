@@ -25,7 +25,22 @@ class Shop
 
 	protected function del_item($index)
 	{
-		unset($this->data_item[$index]);
+		$this->data_item->offsetUnset($index);
+		// array_splice($this->data_item, $index, 1);
+		// $this->data_item = array_combine(range(1, count($this->data_item)), array_values($this->data_item));
+		// array_splice($this->data_item, $index, -$index);
+		// $arrayobj->offsetSet(null, 'last');
+	}
+
+	protected function update_index()
+	{
+		for ($i=0; $i < count($this->data_item) ; $i++) 
+		{ 
+			if (!$this->data_item->offsetExists($i)) 
+			{
+				$this->data_item->offsetSet($i, $this->data_item[$i]);
+			}
+		}
 	}
 }
 
@@ -77,11 +92,12 @@ class Cart extends Shop
 			}
 		}
 		parent::del_item($index);
+		// parent::update_index();
 	}
 
 	function showAll()
 	{
-		var_dump($this->item);
+		print_r($this->item);
 	}
 
 	function addDiscount($val)
@@ -98,9 +114,15 @@ class Cart extends Shop
 	{
 		for ($i=0; $i < count($this->item) ; $i++) 
 		{ 
-			if ($this->item[$i]) 
+			if ($this->data_item->offsetExists($i)) 
 			{
 				$this->total_quantity += $this->item[$i]->quantity;
+			}
+			else
+			{
+				if ($this->data_item->offsetExists($i+1)) {
+					$this->total_quantity += $this->item[$i+1]->quantity;
+				}
 			}
 		}
 		echo $this->total_quantity;
@@ -116,7 +138,7 @@ $cart->addItem('{"item_id":3,"price":5000, "quantity":2}');
 $cart->removeItem('{"item_id": 2}');
 $cart->addItem('{ "item_id": 4, "price": 400, "quantity": 6 }');
 
-$cart->totalItems();
+// $cart->totalItems();
 $cart->totalQuantity();
 $cart->showAll();
  ?>
