@@ -107,6 +107,8 @@ class Cart extends Shop
 	function totalItems()
 	{
 		$this->total_item = count($this->item);
+		echo $this->total_item;
+		echo "\n";
 	}
 
 	function totalQuantity()
@@ -125,6 +127,36 @@ class Cart extends Shop
 			}
 		}
 		echo $this->total_quantity;
+		echo "\n";
+	}
+
+	function totalPrice()
+	{
+		for ($i=0; $i < count($this->data_item) ; $i++) 
+		{ 
+			if ($this->data_item->offsetExists($i)) 
+			{
+				$this->total_price += $this->item[$i]->quantity * $this->item[$i]->price ;
+			}
+			else
+			{
+				if ($this->data_item->offsetExists($i+1)) {
+					$this->total_quantity += $this->item[$i+1]->quantity * $this->item[$i+1]->price;
+				}
+				else
+				{
+					$this->total_quantity += $this->item[$i]->quantity * $this->item[$i]->price;
+				}
+			}
+		}
+
+		echo ($this->total_price * 50)/100;
+		echo "\n";
+	}
+
+	function checkOut()
+	{
+		
 	}
 
 
@@ -136,8 +168,9 @@ $cart->addItem('{"item_id":2,"price":1000}');
 $cart->addItem('{"item_id":3,"price":5000, "quantity":2}');	
 $cart->removeItem('{"item_id": 2}');
 $cart->addItem('{ "item_id": 4, "price": 400, "quantity": 6 }');
-
-// $cart->totalItems();
-// $cart->totalQuantity();
+$cart->addDiscount('50%');
+$cart->totalItems();
+$cart->totalQuantity();
+$cart->totalPrice();
 $cart->showAll();
  ?>
