@@ -1,0 +1,11 @@
+Tanggal Transaksi : 08 July 2020 19:46:14
+========================= ITEMS PEMBELIAN =========================
+Item Id 		Qty 		Price 			Sub Total
+1			3		30000			90000
+3			2		5000			10000
+4			6		400			2400
+
+							Total 	: Rp.102400
+							Disc 	: 50%
+								: -Rp.51200
+						Grand Total 	: Rp.51200
